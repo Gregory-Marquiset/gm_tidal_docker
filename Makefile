@@ -13,7 +13,7 @@ build-c: ## Build sans cache
 	docker build --no-cache -t $(IMAGE_NAME) .
 
 run: ## Run en interactif
-	docker run -it --name $(CONTAINER_NAME) --cap-add=sys_nice --ulimit rtprio=95 $(IMAGE_NAME) sh
+	docker run -it --name $(CONTAINER_NAME) --device /dev/snd --cap-add=sys_nice --ulimit rtprio=95 --ulimit memlock=-1 $(IMAGE_NAME) sh
 
 once: build run clean ## build + run + clean
 
